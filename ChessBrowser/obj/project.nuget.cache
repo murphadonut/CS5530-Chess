@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "na78ZRloZuXF9kvLsCF4oB6ZQ4r3tK2Ri2iY4Z27o3fVGPu0kauoz4itaQyxNGhOwHtyz6bb27q0LSL7ptgeeQ==",
+  "dgSpecHash": "khiCjfD9xOvfpbzV9HqG7DkOqMGVNiEs37TilzhgzNqUnXFCy7IiZeSW8hXk4x2SjulqR7fFjfkaotuvfisN9g==",
   "success": true,
-  "projectFilePath": "C:\\Data\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
+  "projectFilePath": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Phuk\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\Phuk\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",

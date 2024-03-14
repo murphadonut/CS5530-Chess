@@ -28,20 +28,14 @@ namespace ChessBrowser
             // This will build a connection string to your user's database on atr,
             // assuimg you've typed a user and password in the GUI
             string connection = mainPage.GetConnectionString();
-
-
-
-            // TODO:
-            //       Load and parse the PGN file
-            //       We recommend creating separate libraries to represent chess data and load the file
+            
+            // Load and parse the PGN file
             ChessGame[] allGames = PGNReader.parsePGN(PGNfilename);
-
-            // TODO:
-            //       Use this to tell the GUI's progress bar how many total work steps there are
-            //       For example, one iteration of your main upload loop could be one work step
+            
+            // Use this to tell the GUI's progress bar how many total work steps there are           
             mainPage.SetNumWorkItems(allGames.Length);
 
-
+            // Start sql stuff
             using (MySqlConnection conn = new MySqlConnection(connection))
             {
                 try
@@ -49,23 +43,58 @@ namespace ChessBrowser
                     // Open a connection
                     conn.Open();
 
-                    // TODO:
-                    //       iterate through your data and generate appropriate insert commands
+                    // Gonna cache the command
+                    MySqlCommand cmd = conn.CreateCommand();
+
+                    // We will batch 4 commands together
+                    cmd.CommandText =
+                        "INSERT IGNORE INTO Players (Name, Elo) values (@whiteName, @whiteELO) ON DUPLICATE KEY UPDATE Elo = IF(@whiteELO > Elo, @whiteELO, Elo);" +
+                        "INSERT IGNORE INTO Players (Name, Elo) values (@blackName, @blackELO) ON DUPLICATE KEY UPDATE Elo = IF(@blackELO > Elo, @blackELO, Elo);" +
+                        "INSERT IGNORE INTO Events (Name, Site, Date) values (@eventName, @eventSite, @eventDate);" +
+                        "INSERT IGNORE INTO Games (Round, Result, Moves, BlackPlayer, WhitePlayer, eID) values (@round, @result, @moves, " + 
+                        "(select pID from Players where Name = @blackName), " + 
+                        "(select pID from Players where Name = @whiteName), " + 
+                        "(select eID from Events where Name = @eventName));";
+
+                    // Put temporary placeholder strings for each of the parameters
+                    cmd.Parameters.AddWithValue("@whiteName", "");
+                    cmd.Parameters.AddWithValue("@whiteELO", "");
+                    cmd.Parameters.AddWithValue("@blackName", "");
+                    cmd.Parameters.AddWithValue("@blackELO", "");
+                    cmd.Parameters.AddWithValue("@eventName", "");
+                    cmd.Parameters.AddWithValue("@eventSite", "");
+                    cmd.Parameters.AddWithValue("@eventDate", "");
+                    cmd.Parameters.AddWithValue("@round", "");
+                    cmd.Parameters.AddWithValue("@result", "");
+                    cmd.Parameters.AddWithValue("@moves", "");
+
+                    // Cache the command
+                    cmd.Prepare();
+
+                    // Iterate over each chess game
                     foreach (ChessGame game in allGames)
                     {
-                        MySqlCommand cmd = new MySqlCommand();
-                        cmd.CommandText =
-                            $"INSERT IGNORE INTO Players (Name, Elo) values ({game.whiteName}, {game.whiteELO}) ON DUPLICATE KEY UPDATE Elo = IF({game.whiteELO} > Elo, {game.whiteELO}, Elo);" +
-                            $"INSERT IGNORE INTO Players (Name, Elo) values ({game.blackName}, {game.blackELO}) ON DUPLICATE KEY UPDATE Elo = IF({game.blackELO} > Elo, {game.blackELO}, Elo);" + 
-                            $"INSERT IGNORE INTO Events (Name, Site, Date) values ({game.eventName}, {game.eventSite}, {game.eventDate});" + 
-                            $"INSERT IGNORE INTO Games (Round, Result, Moves, BlackPlayer, WhitePlayer, eID) values ({game.round}, {game.result}, {game.moves}, (select pID from Players where Name=\"{game.blackName}\"), (select pID from Players where Name=\"{game.whiteName}\"), (select eID from Events where Name=\"{game.eventName}\"))";
+                        // Set parameters accordingly
+                        cmd.Parameters["@whiteName"].Value = game.whiteName;
+                        cmd.Parameters["@whiteELO"].Value = game.whiteELO;
+                        cmd.Parameters["@blackName"].Value = game.blackName;
+                        cmd.Parameters["@blackELO"].Value = game.blackELO;
+                        cmd.Parameters["@eventName"].Value = game.eventName;
+                        cmd.Parameters["@eventSite"].Value = game.eventSite;
+                        cmd.Parameters["@eventDate"].Value = game.eventDate;
+                        cmd.Parameters["@round"].Value = game.round;
+                        cmd.Parameters["@result"].Value = game.result;
+                        cmd.Parameters["@moves"].Value = game.moves;
+
+                        // Execute the command and return nothing
+                        cmd.ExecuteNonQuery();
+
+                        // Update the progress bar
+                        await mainPage.NotifyWorkItemCompleted();
                     }
 
-                    // TODO:
-                    //       Use this inside a loop to tell the GUI that one work step has completed:
-                    await mainPage.NotifyWorkItemCompleted();
-
                 }
+
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(e.Message);

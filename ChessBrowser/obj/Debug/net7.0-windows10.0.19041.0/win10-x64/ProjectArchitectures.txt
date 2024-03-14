@@ -1,1 +1,1 @@
-C:\Data\CS5530\ChessBrowser\ChessBrowser.csproj;x64
+C:\Data\GIT\CS5530\ChessBrowser\ChessBrowser.csproj;x64

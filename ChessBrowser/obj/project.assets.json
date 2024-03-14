@@ -4310,11 +4310,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Data\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
+      "projectUniqueName": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
       "projectName": "ChessBrowser",
-      "projectPath": "C:\\Data\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
+      "projectPath": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\ChessBrowser.csproj",
       "packagesPath": "C:\\Users\\Phuk\\.nuget\\packages\\",
-      "outputPath": "C:\\Data\\CS5530\\ChessBrowser\\obj\\",
+      "outputPath": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
