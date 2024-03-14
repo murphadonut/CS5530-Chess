@@ -1,0 +1,1 @@
+C:\Data\CS5530\ChessBrowser\ChessBrowser.csproj;x64
