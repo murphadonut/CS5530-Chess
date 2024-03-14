@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Data\\CS5530\\",
+  "WorkspaceRootPath": "C:\\Data\\GIT\\CS5530\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\cs5530\\chessbrowser\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\git\\cs5530\\chessbrowser\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|solutionrelative:chessbrowser\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\cs5530\\chessbrowser\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\git\\cs5530\\chessbrowser\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|solutionrelative:chessbrowser\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\cs5530\\chessbrowser\\pgnreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|c:\\data\\git\\cs5530\\chessbrowser\\pgnreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E777F89-D589-45CC-A14B-354E44A187FA}|ChessBrowser\\ChessBrowser.csproj|solutionrelative:chessbrowser\\pgnreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,11 +28,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Queries.cs",
-              "DocumentMoniker": "C:\\Data\\CS5530\\ChessBrowser\\Queries.cs",
+              "DocumentMoniker": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\Queries.cs",
               "RelativeDocumentMoniker": "ChessBrowser\\Queries.cs",
-              "ToolTip": "C:\\Data\\CS5530\\ChessBrowser\\Queries.cs",
+              "ToolTip": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\Queries.cs",
               "RelativeToolTip": "ChessBrowser\\Queries.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAuwDwAAABPAQAA",
+              "ViewState": "AQIAADMAAAAAAAAAAAAuwDQAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-13T07:43:58.009Z",
               "EditorCaption": ""
@@ -41,27 +41,25 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "PGNReader.cs",
-              "DocumentMoniker": "C:\\Data\\CS5530\\ChessBrowser\\PGNReader.cs",
+              "DocumentMoniker": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\PGNReader.cs",
               "RelativeDocumentMoniker": "ChessBrowser\\PGNReader.cs",
-              "ToolTip": "C:\\Data\\CS5530\\ChessBrowser\\PGNReader.cs",
+              "ToolTip": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\PGNReader.cs",
               "RelativeToolTip": "ChessBrowser\\PGNReader.cs",
               "ViewState": "AQIAACIAAAAAAAAAAAAQwDsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-13T07:43:18.431Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-13T07:43:18.431Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ChessGame.cs",
-              "DocumentMoniker": "C:\\Data\\CS5530\\ChessBrowser\\ChessGame.cs",
+              "DocumentMoniker": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\ChessGame.cs",
               "RelativeDocumentMoniker": "ChessBrowser\\ChessGame.cs",
-              "ToolTip": "C:\\Data\\CS5530\\ChessBrowser\\ChessGame.cs",
+              "ToolTip": "C:\\Data\\GIT\\CS5530\\ChessBrowser\\ChessGame.cs",
               "RelativeToolTip": "ChessBrowser\\ChessGame.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAxwBoAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T00:48:57.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-04T00:48:57.498Z"
             }
           ]
         }
