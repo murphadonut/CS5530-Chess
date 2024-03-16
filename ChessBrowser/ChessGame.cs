@@ -88,6 +88,7 @@ namespace ChessBrowser
             }
         }
 
+        // Didn't end up needing this
         override
         public string ToString()
         {

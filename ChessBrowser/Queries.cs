@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /*
-  Author: Daniel Kopta and ...
+  Author: Daniel Kopta and Murphy Rickett and Simon
   Chess browser backend 
 */
 
@@ -123,7 +123,7 @@ namespace ChessBrowser
         {
             // This will build a connection string to your user's database on atr,
             // assuimg you've typed a user and password in the GUI
-            string connection = mainPage.GetConnectionString();
+            string connection = mainPage.GetConnectionString() + ";Allow Zero Datetime=True";
 
             // Build up this string containing the results from your query
             string parsedResult = "";
@@ -142,7 +142,7 @@ namespace ChessBrowser
                     // Gonna cache the command
                     MySqlCommand cmd = conn.CreateCommand();
 
-                    // We will batch 4 commands together
+                    // Made a single query that can filter everything, cause I'm that cool
                     cmd.CommandText = "select " +
                         "Events.Name, Site, Date, White, WhiteElo, Black, BlackElo, Result" + (showMoves ? ", Moves" : "") +
                         " from Events natural join " +
@@ -167,6 +167,7 @@ namespace ChessBrowser
                     {
                         while (reader.Read())
                         {
+                            // Could have made a helper method to fromat the string but oh well
                             numRows++;
                             parsedResult +=
                                 "\nEvent: " + reader["Name"] +
