@@ -50,7 +50,7 @@ namespace ChessBrowser
                         eventDate = value;
                         if (value.Contains('?'))
                         {
-                            eventDate = "0000-00-00";
+                            eventDate = "0000.00.00";
                         }                     
                         break;
                     case "Round":
@@ -87,11 +87,21 @@ namespace ChessBrowser
                 }
             }
         }
-        // Only used for debugging
+
         override
         public string ToString()
         {
-            return "Event: " + eventName + "\nSite: " + eventSite + "\nDate: " + eventDate + "\nRound: " + round + "\nWhite: " + whiteName + "\nBlack: " + blackName + "\nWhiteElo: " + whiteELO + "\nBlackElo " + blackELO + "\nResult: " + result + "\nMoves: " + moves;
+            return
+                "Event: " + eventName +
+                "\nSite: " + eventSite +
+                "\nDate: " + eventDate.Substring(5, 2) +
+                "/" + eventDate.Substring(8, 2) +
+                "/" + eventDate.Substring(0, 4) +
+                " 12:00:00 AM\nWhite: " + whiteName +
+                " (" + whiteELO +
+                ")\nBlack: " + blackName +
+                " (" + blackELO +
+                ")\nResult: " + result;
         }
     }
 }

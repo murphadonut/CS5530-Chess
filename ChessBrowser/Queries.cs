@@ -28,10 +28,10 @@ namespace ChessBrowser
             // This will build a connection string to your user's database on atr,
             // assuimg you've typed a user and password in the GUI
             string connection = mainPage.GetConnectionString();
-            
+
             // Load and parse the PGN file
             ChessGame[] allGames = PGNReader.parsePGN(PGNfilename);
-            
+
             // Use this to tell the GUI's progress bar how many total work steps there are           
             mainPage.SetNumWorkItems(allGames.Length);
 
@@ -51,9 +51,9 @@ namespace ChessBrowser
                         "INSERT IGNORE INTO Players (Name, Elo) values (@whiteName, @whiteELO) ON DUPLICATE KEY UPDATE Elo = IF(@whiteELO > Elo, @whiteELO, Elo);" +
                         "INSERT IGNORE INTO Players (Name, Elo) values (@blackName, @blackELO) ON DUPLICATE KEY UPDATE Elo = IF(@blackELO > Elo, @blackELO, Elo);" +
                         "INSERT IGNORE INTO Events (Name, Site, Date) values (@eventName, @eventSite, @eventDate);" +
-                        "INSERT IGNORE INTO Games (Round, Result, Moves, BlackPlayer, WhitePlayer, eID) values (@round, @result, @moves, " + 
-                        "(select pID from Players where Name = @blackName), " + 
-                        "(select pID from Players where Name = @whiteName), " + 
+                        "INSERT IGNORE INTO Games (Round, Result, Moves, BlackPlayer, WhitePlayer, eID) values (@round, @result, @moves, " +
+                        "(select pID from Players where Name = @blackName), " +
+                        "(select pID from Players where Name = @whiteName), " +
                         "(select eID from Events where Name = @eventName));";
 
                     // Put temporary placeholder strings for each of the parameters
@@ -139,9 +139,47 @@ namespace ChessBrowser
                     // Open a connection
                     conn.Open();
 
-                    // TODO:
-                    //       Generate and execute an SQL command,
-                    //       then parse the results into an appropriate string and return it.
+                    // Gonna cache the command
+                    MySqlCommand cmd = conn.CreateCommand();
+
+                    // We will batch 4 commands together
+                    cmd.CommandText = "select " +
+                        "Events.Name, Site, Date, White, WhiteElo, Black, BlackElo, Result" + (showMoves ? ", Moves" : "") +
+                        " from Events natural join " +
+                            "(select eID, White, WhiteElo, blackP.Name as Black, blackP.Elo as BlackElo," +
+                            " Result, Moves from Players blackP join " +
+                                "(select Moves, Result, eID, BlackPlayer, whiteP.Name as White, whiteP.Elo " +
+                                "as WhiteELo from Players whiteP join Games g on g.WhitePlayer = whiteP.pID " +
+                                "where whiteP.Name like @whiteNameVar) " +
+                            "as first on BlackPlayer = blackP.pID where blackP.Name like @blackNameVar) " +
+                        "as second where Moves like @movesVar && Result like @winnerVar" + (useDate ? " && Date between '" + start.Date.ToString("yyyy/MM/dd") + "' and '" + end.Date.ToString("yyyy/MM/dd") + "'" : "") + ";";
+
+                    cmd.Parameters.AddWithValue("@whiteNameVar", "%" + white);
+                    cmd.Parameters.AddWithValue("@blackNameVar", "%" + black);
+                    cmd.Parameters.AddWithValue("@movesVar", opening + "%");
+                    cmd.Parameters.AddWithValue("@winnerVar", "%" + winner);
+
+                    // Cache the command
+                    cmd.Prepare();
+
+                    // Execute Query
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            numRows++;
+                            parsedResult +=
+                                "\nEvent: " + reader["Name"] +
+                                "\nSite: " + reader["Site"] +
+                                "\nDate: " + reader["Date"] +
+                                "\nWhite: " + reader["White"] +
+                                " (" + reader["WhiteElo"] +
+                                ")\nBlack: " + reader["Black"] +
+                                " (" + reader["BlackElo"] +
+                                ")\nResult: " + reader["Result"] + 
+                                (showMoves ? "\nMoves: " + reader["Moves"] : "") + "\n";
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
